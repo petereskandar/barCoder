@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Page One</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="ion-content-backColor">
+
+  <button ion-button full color="primary" (click)="scan()">
+    <ion-icon name="qr-scanner" style="padding-right: 5px"> </ion-icon> Scan
+  </button>
+  <button ion-button full color="danger" (click)="reset()">
+    <ion-icon name="remove-circle" style="padding-right: 5px"> </ion-icon> Reset
+  </button>
+
+  <!--<div *ngIf="results">
+    <h2>Format : {{results.format}}</h2>
+    <h2>Text : {{results.text}}</h2>
+  </div>-->
+
+  <ion-card *ngIf="scanResult">
+    <ion-card-header class="ion-card-header" icon-left>
+          <ion-icon name="ios-alert-outline"></ion-icon>  Prodotto non trovato
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+
+        <ion-item color="ion-content-backColor">
+          <ion-label stacked>Format :</ion-label>
+         <ion-input type="text" [(ngModel)]="scanResult.format"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Code :</ion-label>
+          <ion-input type="text" [(ngModel)]="scanResult.barCode" ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Descrizione :</ion-label>
+          <ion-input type="text" [(ngModel)]="scanResult.description"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Prezzo :</ion-label>
+          <ion-input type="text" [(ngModel)]="scanResult.price"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Categoria :</ion-label>
+          <ion-input type="text" [(ngModel)]="scanResult.category"></ion-input>
+        </ion-item>
+
+        <ion-item text-center>
+          <button ion-button color="primary" round icon-left (click)="insertProduct()">
+            <ion-icon name='construct' is-active="false" ></ion-icon>
+            Insert
+          </button>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
+</ion-content>

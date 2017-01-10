@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Page Two</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="ion-content-backColor">
+  <ion-row>
+    <ion-col width-50>
+        <button ion-button full icon-left color="danger" (click)="delete()">
+          <ion-icon name="trash"></ion-icon> Delete</button>
+    </ion-col>
+    <ion-col width-50>
+        <button ion-button icon-left full color="secondary" (click)="add('peter', 'eskandar')">
+          <ion-icon name="person-add"></ion-icon> Add</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-list-header *ngIf="productList" class="ion-list-backColor">
+    Product List
+  </ion-list-header>
+  <ion-list [virtualScroll]="productList" *ngIf="productList">
+    <ion-item-sliding *virtualItem="let product" class="ion-list-backColor">
+
+        <ion-item class="ion-list-backColor">
+            <text-img [text]="product.barCode" item-left></text-img>  {{product.format}}
+        </ion-item>
+
+        <ion-item-options>
+            <button ion-button color="danger"><ion-icon name="trash"></ion-icon> Delete</button>
+        </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
