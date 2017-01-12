@@ -13,6 +13,7 @@ export class ScannerApi {
   private storage: SQLite;
   private isOpen: boolean;
   productList: barcodeResult[];
+  foundProduct: barcodeResult;
 
   constructor(private platform : Platform, private loadingController : LoadingController){
     this.platform.ready().then(() => {
@@ -33,11 +34,6 @@ export class ScannerApi {
           let productList = [];
           if (data.rows.length > 0) {
             for (let i = 0; i < data.rows.length; i++) {
-              /*productList.push({
-               id: data.rows.item(i).id,
-               firstname: data.rows.item(i).firstname,
-               lastname: data.rows.item(i).lastname
-               });*/
               productList[i] = new barcodeResult(data.rows.item(i).barCode, data.rows.item(i).format, data.rows.item(i).description, data.rows.item(i).price, data.rows.item(i).category);
             }
           }
@@ -64,6 +60,32 @@ export class ScannerApi {
     });
   }
 
+
+  public searchProduct(product: barcodeResult){
+    return new Promise((resolve, reject) => {
+      this.storage.executeSql("SELECT * FROM productList where barCode = ?", [product.barCode]).then((data) => {
+        let foundProduct = null;
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            foundProduct = new barcodeResult(data.rows.item(i).barCode, data.rows.item(i).format, data.rows.item(i).description, data.rows.item(i).price, data.rows.item(i).category);
+          }
+        }
+        resolve(foundProduct);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public deleteProduct(product: barcodeResult){
+    return new Promise((resolve, reject) => {
+      this.storage.executeSql("delete FROM productList where barCode = ?", [product.barCode]).then((data) => {
+        resolve(data);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 
 
    delete() {

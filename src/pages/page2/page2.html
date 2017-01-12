@@ -5,10 +5,26 @@
     </button>
     <ion-title>Page Two</ion-title>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Cerca Prodotto"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateProducts()"
+                   (focusout)="stopSpinner()"
+                   (keyup)="startSpinner()">
+
+    </ion-searchbar>
+  </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content padding class="ion-content-backColor">
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
   <ion-row>
     <ion-col width-50>
         <button ion-button full icon-left color="danger" (click)="delete()">
@@ -23,15 +39,21 @@
   <ion-list-header *ngIf="productList" class="ion-list-backColor">
     Product List
   </ion-list-header>
-  <ion-list [virtualScroll]="productList" *ngIf="productList">
-    <ion-item-sliding *virtualItem="let product" class="ion-list-backColor">
+  <ion-list [virtualScroll]="productList" *ngIf="productList" [headerFn]="getHeader">
 
-        <ion-item class="ion-list-backColor">
-            <text-img [text]="product.barCode" item-left></text-img>  {{product.format}}
+    <ion-item-divider class="ion-item-divider" *virtualHeader="let header">
+      {{header}}
+    </ion-item-divider>
+
+    <ion-item-sliding *virtualItem="let product; let i = index" class="ion-list-backColor">
+
+        <ion-item class="ion-list-backColor" (click)="getProductDetails($event, product)">
+            <text-img [text]="product.description" item-left></text-img>  {{product.description}}
+            <p style="color: white">Prezzo : {{product.price}}</p>
         </ion-item>
 
         <ion-item-options>
-            <button ion-button color="danger"><ion-icon name="trash"></ion-icon> Delete</button>
+            <button ion-button color="danger" (click)="deleteProduct($event, product, i)"><ion-icon name="trash"></ion-icon> Delete</button>
         </ion-item-options>
 
     </ion-item-sliding>

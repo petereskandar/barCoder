@@ -23,6 +23,40 @@
 
   <ion-card *ngIf="scanResult">
     <ion-card-header class="ion-card-header" icon-left>
+      <ion-icon name="ios-alert-outline"></ion-icon>  Prodotto non trovato
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-label stacked><ion-icon name="book"> </ion-icon> Format :</ion-label>
+        <ion-input type="text" [(ngModel)]="scanResult.format"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked><ion-icon name="barcode"> </ion-icon> Code :</ion-label>
+        <ion-input type="text" [(ngModel)]="scanResult.barCode" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked><ion-icon name="clipboard"> </ion-icon> Descrizione :</ion-label>
+        <ion-input type="text" [(ngModel)]="scanResult.description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked> <ion-icon name="cash"> </ion-icon> Prezzo :</ion-label>
+        <ion-input type="text" [(ngModel)]="scanResult.price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked> <ion-icon name="ribbon"> </ion-icon> Categoria :</ion-label>
+        <ion-input type="text" [(ngModel)]="scanResult.category"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-fab center bottom>
+          <button ion-fab color="prim" (click)="insertProduct()"><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+
+  <!--<ion-card *ngIf="scanResult">
+    <ion-card-header class="ion-card-header" icon-left>
           <ion-icon name="ios-alert-outline"></ion-icon>  Prodotto non trovato
     </ion-card-header>
     <ion-card-content>
@@ -62,7 +96,7 @@
 
       </ion-list>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
 
   <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
 </ion-content>

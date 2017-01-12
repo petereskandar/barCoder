@@ -18,7 +18,15 @@ export class Page1 {
     BarcodeScanner.scan().then((barcodeData) => {
       if(!barcodeData.cancelled){
         this.scanResult = new barcodeResult(barcodeData.text, barcodeData.format);
-        alert(this.scanResult.barCode);
+
+        //searching if barcode exist
+        this.dbService.searchProduct(this.scanResult).then((result)=> {
+          if(result)
+            //this.scanResult = result;
+          console.log('test');
+        }, (error)=>{
+
+        });
       }
     },(err) => {
       //an error occured
@@ -29,7 +37,7 @@ export class Page1 {
   insertProduct(){
     alert(this.scanResult.barCode);
     this.dbService.insertProduct(this.scanResult);
-    this.scanResult = new barcodeResult('','');
+    this.scanResult = null;
   }
 
   reset(){

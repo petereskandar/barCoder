@@ -12,3 +12,22 @@ page-page1 {
   background: #f0b840;
   color:black;
 }
+
+ion-input {
+  background-color: map-get($colors, light);
+  padding-left: 10px;
+  margin: 5px;
+  color: #6c6c6c;
+}
+
+ion-item.item-block.item.item-md.item-label-stacked.item-input {
+  padding-right: 10px;
+}
+
+.ion-item::after{
+  border-bottom-color: transparent;
+}
+
+.ion-fab{
+  margin: 10px;
+}

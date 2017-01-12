@@ -14,3 +14,18 @@ page-page2 {
   background: linear-gradient(to left, #E6DADA , #274046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
 }
+
+.ion-list-backColor p {
+  color: white;
+}
+
+.ion-item-divider{
+  background-color: steelblue;
+  color: white;
+}
+
+.spinner-container {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
